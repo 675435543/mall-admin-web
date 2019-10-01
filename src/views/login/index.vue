@@ -45,21 +45,25 @@
     </el-card>
     <img :src="login_center_bg" class="login-center-layout">
     <el-dialog
-      title="特别赞助"
+      title="公众号二维码"
       :visible.sync="dialogVisible"
+      :show-close="false"
+      :center="true"
       width="30%">
-      <span>mall项目已由CODING特别赞助，点击去支持，页面加载完后点击<span class="color-main font-medium">免费体验</span>按钮即可完成支持，谢谢！</span>
+      <div style="text-align: center">
+        <span class="font-title-large">mall全套学习教程连载中<span class="color-main font-extra-large">关注公众号</span>第一时间获取</span>
+        <img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/banner/qrcode_for_macrozheng_258.jpg" width="160" height="160" style="margin-top: 10px">
+      </div>
       <span slot="footer" class="dialog-footer">
-    <el-button @click="dialogCancel">残忍拒绝</el-button>
-    <el-button type="primary" @click="dialogConfirm">去支持</el-button>
-  </span>
+    <el-button type="primary" @click="dialogConfirm">确定</el-button>
+      </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
   import {isvalidUsername} from '@/utils/validate';
-  import {setSupport,getSupport,SupportUrl} from '@/utils/support';
+  import {setSupport,getSupport} from '@/utils/support';
   import login_center_bg from '@/assets/images/login_center_bg.png'
 
   export default {
@@ -91,7 +95,8 @@
         loading: false,
         pwdType: 'password',
         login_center_bg,
-        dialogVisible:false
+        dialogVisible:false,
+        supportDialogVisible:false
       }
     },
     methods: {
@@ -126,7 +131,6 @@
       dialogConfirm(){
         this.dialogVisible =false;
         setSupport(true);
-        window.location.href=SupportUrl;
       },
       dialogCancel(){
         this.dialogVisible = false;
